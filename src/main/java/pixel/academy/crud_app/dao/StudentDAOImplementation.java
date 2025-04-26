@@ -56,4 +56,24 @@ public class StudentDAOImplementation implements StudentDAO {
         return theQuery.getResultList();
     }
 
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+
+        entityManager.merge(theStudent);
+
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+
+        // preluam studentul di baza de date
+        Student theStudent = entityManager.find(Student.class, id);
+
+        // stergem studentul
+        entityManager.remove(theStudent);
+
+    }
+
 }
